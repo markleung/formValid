@@ -1,0 +1,127 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>form test</title>
+<!-- 		<link href="css/bootstrap.css" rel="stylesheet"> -->
+		<style>
+			.wrapper {
+				width:900px;
+				margin:0 auto;
+				border:2px solid black;
+			}
+
+			.control-group {
+				margin:20px 0;
+			}
+
+			.control-label {
+				display:block;
+				float:left;
+				width:200px;
+				line-height:30px;
+				text-align:right;
+			}
+
+			.controls {
+				margin-left:220px;
+				line-height:30px;
+			}
+
+			.controls input {
+				border: 1px solid #999999;
+    			border-radius: 4px 4px 4px 4px;
+    			padding: 6px;
+			}
+
+			.controls textarea {
+				border: 1px solid #999999;
+    			border-radius: 4px 4px 4px 4px;
+    			padding: 8px;
+			}
+
+			.controls select {
+				border: 1px solid #999999;
+    			border-radius: 4px 4px 4px 4px;
+    			padding: 6px;
+			}
+
+			.help-text {
+				display:inline-block;
+				margin:0px;
+				margin-left:30px;
+			}
+
+		</style>
+	</head>
+	<body>
+		<div class="wrapper">
+			<form action="#" method="post" id="form1" class="form">
+				<div class="control-group">
+					<label for="name" class="control-label">name:</label>
+					<div class="controls">
+						<input id="name" type="text" data-valid="require num"/>
+					</div>
+				</div>
+				<div class="control-group">
+					<label for="age" class="control-label">age:</label>
+					<div class="controls">
+						<input id="age" type="text" data-valid="require"/>
+						<p class="help-text"></p>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">sexual:</label>
+					<div class="controls">
+						<input name="sexual" type="radio" value="male" checked="checked" id="male"/><label for="male">male</label>
+						<input name="sexual" type="radio" value="female" id="female"/><label for="female">female</label>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">sport:</label>
+					<div class="controls checkbox">
+						<input name="sport" type="checkbox" id="basketball"/><label for="basketball">basketball</label>
+						<input name="sport" type="checkbox" id="football"/><label for="football">football</label>
+						<input name="sport" type="checkbox" id="baseball"/><label for="baseball">baseball</label>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">car:</label>
+					<div class="controls checkbox">
+						<input name="car" type="checkbox" id="vans"/><label for="vans">vans</label>
+						<input name="car" type="checkbox" id="bus"/><label for="bus">bus</label>
+						<input name="car" type="checkbox" id="car"/><label for="car">car</label>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">vehicle:</label>
+					<div class="controls">
+						<select>
+							<option value=" " selected="selected"> </option>
+							<option value="vans">vans</option>
+							<option value="bus">bus</option>
+							<option value="car">car</option>
+						</select>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">message:</label>
+					<div class="controls">
+						<textarea style="width:300px;height:100px;" data-valid='maxlength' maxlength='10'></textarea>
+						<p class="help-text"></p>
+					</div>
+				</div>
+				<div class="control-group">
+					<div class="controls">
+						<input type="submit" value="click me" />
+					</div>
+				</div>
+
+			</form>
+		</div>
+	<script src="js/jquery.js"></script>
+	<script src="js/formValidate.js"></script>
+<!--	 <script src="js/bootstrap.js"></script> -->
+
+	</body>
+</html>
