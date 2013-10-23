@@ -12,17 +12,32 @@ var mkForm = {
 		mkForm.config.allRightFlag = true;
 		$('[data-valid]').trigger('blur');
 		mkForm.toValidateCheckbox();
-
+		mkForm.toValidateSelect();
 
 		if(mkForm.config.allRightFlag == true)
 			return true;
 		return false;
 	},
 
+	toValidateSelect: function(){
+		var helptext = "select a car at least";
+		$('[data-valid="select"]').each(function(){
+			$(this).find('.help-inline').remove();
+			$(this).parents('.control-group').removeClass('error');
+
+			if($(this).find('option:selected').val()==='0'){
+				mkForm.addHelptext(this, helptext);
+				mkForm.config.allRightFlag = false;
+				$(this).parents('.control-group').addClass('error');
+			}
+		});
+	},
+
 	toValidateCheckbox: function(){
-		var helptext = 'chose one';
-		$('.checkbox').each(function(){
-			$(this).find('.help-text').text(' ');
+		var helptext = 'you must choose one';
+		$('[data-valid="checkbox"]').each(function(){
+			$(this).find('.help-inline').remove();
+			$(this).parents('.control-group').removeClass('error');
 			var that = this;
 			var checkedCount = 0;
 			$(this).find(':checkbox').each(function(){
@@ -31,6 +46,7 @@ var mkForm = {
 				}
 			});
 			if(checkedCount == 0){
+				$(this).parents('.control-group').addClass('error');
 				mkForm.addHelptext(that, helptext);
 				mkForm.config.allRightFlag = false;
 			}
@@ -44,7 +60,8 @@ var mkForm = {
 		var data = $(this).val();
 		var validFlag = true;
 		var helptext = '';
-		$(this).parent().find('.help-text').text(helptext);
+		$that.parents('.control-group').removeClass('error');
+		$(this).parent().find('.help-inline').remove();
 		$.each(validType, function(index, value){
 			switch (value){
 			case 'require':
@@ -63,6 +80,7 @@ var mkForm = {
 				break;
 			}
 			if(!validFlag){
+				$that.parents('.control-group').addClass('error');
 				mkForm.addHelptext(target, errortext);
 				mkForm.config.allRightFlag = false;
 			}
@@ -73,14 +91,14 @@ var mkForm = {
 	},
 
 	addHelptext : function(target, text){
-		var a = $(target).find('.help-text')[0];
+		var a = $(target).find('.help-inline')[0];
 		if(!a){
-			var helptextP = document.createElement('P');
-			$(helptextP).appendTo($(target)).addClass('help-text');
+			var helptextP = document.createElement('span');
+			$(helptextP).appendTo($(target)).addClass('help-inline');
 		}
-		var helptext = $(target).find('.help-text').text();
+		var helptext = $(target).find('.help-inline').text();
 		helptext += ' '+text;
-		$(target).find('.help-text').text(helptext);
+		$(target).find('.help-inline').text(helptext);
 	},
 
 	validRequire: function(data){
@@ -101,6 +119,8 @@ var mkForm = {
 			return false;
 		return true;
 	}
+
+	//可利用正则表达式增加验证法则
 }
 
 mkForm.init();
